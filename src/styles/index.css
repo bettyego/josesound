@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-100 text-ink-900 font-sans;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  ::selection {
+    @apply bg-brand-500 text-white;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-wide;
+  }
+  /* Surfaces over dark hero/page backgrounds inherit white text via .on-dark scope */
+  .on-dark, .on-dark p, .on-dark li {
+    @apply text-white;
+  }
+}
+
+/* ---------- Components ---------- */
+@layer components {
+  .container-x {
+    @apply max-w-7xl mx-auto px-5 sm:px-8 lg:px-12;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold uppercase tracking-wider text-sm
+           transition-all duration-300 rounded-md relative overflow-hidden;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white shadow-glow
+           hover:bg-brand-600 hover:shadow-[0_0_42px_rgba(249,115,22,0.55)] hover:scale-[1.02];
+  }
+  .btn-outline {
+    @apply btn bg-white border border-ink-300 text-ink-800
+           hover:border-brand-500 hover:text-brand-600 hover:shadow-soft;
+  }
+  /* Use this variant when placed over a dark/charcoal background */
+  .btn-ghost {
+    @apply btn bg-transparent border border-white/30 text-white
+           hover:border-brand-400 hover:text-brand-300 hover:bg-white/5;
+  }
+  .btn-dark {
+    @apply btn bg-ink-800 text-white border border-ink-700 hover:bg-ink-900;
+  }
+
+  .section {
+    @apply py-20 md:py-28 relative;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-brand-600 font-semibold;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block w-8 h-px bg-brand-500;
+  }
+  /* Eyebrow on dark sections shifts to a lighter orange for contrast */
+  .on-dark .eyebrow {
+    @apply text-brand-400;
+  }
+
+  .heading-xl {
+    @apply font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] uppercase;
+  }
+  .heading-lg {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl leading-tight uppercase;
+  }
+  .heading-md {
+    @apply font-display text-3xl sm:text-4xl uppercase tracking-wide;
+  }
+
+  .card {
+    @apply bg-white border border-ink-200 rounded-lg overflow-hidden shadow-soft
+           transition-all duration-500
+           hover:border-brand-500/40 hover:shadow-card hover:-translate-y-1;
+  }
+
+  .input {
+    @apply w-full bg-white border border-ink-300 rounded-md px-4 py-3 text-ink-900 placeholder-ink-400
+           focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20
+           transition-colors;
+  }
+  .label {
+    @apply block text-xs uppercase tracking-widest text-ink-600 mb-2 font-semibold;
+  }
+
+  /* Equalizer bars (decorative) */
+  .equalizer {
+    @apply inline-flex items-end gap-1 h-6;
+  }
+  .equalizer span {
+    @apply block w-1 bg-brand-500 origin-bottom rounded-sm;
+    animation: equalizer 1s ease-in-out infinite;
+  }
+  .equalizer span:nth-child(1) { height: 60%; animation-delay: -0.4s; }
+  .equalizer span:nth-child(2) { height: 100%; animation-delay: -0.2s; }
+  .equalizer span:nth-child(3) { height: 80%; animation-delay: -0.6s; }
+  .equalizer span:nth-child(4) { height: 50%; animation-delay: -0.1s; }
+  .equalizer span:nth-child(5) { height: 90%; animation-delay: -0.3s; }
+}
+
+/* ---------- Utilities ---------- */
+@layer utilities {
+  /* Light variant for use over light backgrounds */
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(17, 24, 39, 0.35);
+    color: transparent;
+  }
+  /* Light grain — barely-there texture for light sections */
+  .bg-noise {
+    background-image:
+      radial-gradient(rgba(17, 24, 39, 0.04) 1px, transparent 1px),
+      radial-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px);
+    background-size: 22px 22px, 30px 30px;
+    background-position: 0 0, 11px 11px;
+  }
+  /* Dark grain — for dark/charcoal sections */
+  .bg-noise-dark {
+    background-image:
+      radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      radial-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px, 30px 30px;
+    background-position: 0 0, 11px 11px;
+  }
+  .clip-corner {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  }
+  /* Subtle gradient panel — soft grey to white */
+  .bg-panel {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);
+  }
+}
+
+/* ---------- Scrollbar (light theme) ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border: 2px solid #F5F5F5;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F97316;
+}
